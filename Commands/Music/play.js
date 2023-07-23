@@ -33,7 +33,7 @@ module.exports = {
 			await player.play(voiceChannel, url, {
 				nodeOptions: {
 					metadata: interaction.channel,
-					// leaveOnEmpty: false,
+					leaveOnEndCooldown: 30000,
 					leaveOnEmptyCooldown: 30000,
 					volume: 50
 				},

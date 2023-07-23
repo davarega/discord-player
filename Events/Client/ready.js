@@ -9,7 +9,7 @@ module.exports = {
 		if(mongoose.connect)
 		console.log("[MONGODB] Database connected!");
 
-		client.user.setActivity("look better");
+		client.user.setActivity("Maintenance!");
 		console.log(`${client.user.username} is online now!`);
 	}
 }

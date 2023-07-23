@@ -10,7 +10,7 @@ module.exports = {
 	 * @param {CommandInteraction} interaction 
 	 */
 	async execute(interaction) {
-		await interaction.deferReply()
+		await interaction.deferReply();
 		const { guild, member } = interaction;
 		const queue = useQueue(guild.id);
 
