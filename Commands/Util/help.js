@@ -12,6 +12,8 @@ module.exports = {
 		const { client } = interaction;
 
 		const emojis = {
+			// developer: "⚙",
+			fun: "🎉",
 			music: "🎵",
 			util: "🛡",
 		}

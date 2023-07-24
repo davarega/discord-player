@@ -22,7 +22,7 @@ player.extractors.register(SpotifyExtractor, {});
 // player.extractors.register(SoundCloudExtractor, {});
 
 module.exports = client;
-module.exports.player = player;
+// module.exports.player = player;
 
 client.login(process.env.TOKEN).then(() => {
 	loadCommands(client);
