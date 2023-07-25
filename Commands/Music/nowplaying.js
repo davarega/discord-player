@@ -10,18 +10,18 @@ module.exports = {
 	 * @param {ChatInputCommandInteraction} interaction 
 	 */
 	async execute(interaction) {
+		console.log(`[Log] ${interaction.user.tag} is trying to use the ${interaction.commandName} command`);
+
 		await interaction.deferReply();
 		const { guild, user } = interaction;
 
 		const queue = useQueue(guild.id);
 		const timeline = useTimeline(guild.id);
 
-		if (!queue) return interaction.reply({ content: `${emojis.error} | I am **not** in a voice channel`, ephemeral: true });
+		if (!queue)
+			return interaction.followUp({ content: `❌ | I am **not** in a voice channel`, ephemeral: true });
 		if (!queue.currentTrack)
-			return interaction.reply({
-				content: "❌ | There is no track **currently** playing",
-				ephemeral: true
-			});
+			return interaction.followUp({ content: "❌ | There is no track **currently** playing", ephemeral: true });
 
 		const track = queue.currentTrack;
 

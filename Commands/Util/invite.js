@@ -10,6 +10,8 @@ module.exports = {
 	 * @param {CommandInteraction} interaction 
 	 */
 	async execute(interaction) {
+		console.log(`[Log] ${interaction.user.tag} is trying to use the ${interaction.commandName} command`);
+
 		const embed = new EmbedBuilder()
 			.setColor("#000001")
 			.setAuthor({ name: "Invite!" })
@@ -26,6 +28,6 @@ module.exports = {
 					.setStyle(ButtonStyle.Link)
 			);
 
-		interaction.reply({ embeds: [embed], components: [row] });
+		return interaction.reply({ embeds: [embed], components: [row] });
 	}
-}
+};

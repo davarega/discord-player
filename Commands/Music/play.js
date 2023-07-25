@@ -14,6 +14,8 @@ module.exports = {
 	 * @param {CommandInteraction} interaction 
 	 */
 	async execute(interaction) {
+		console.log(`[Log] ${interaction.user.tag} is trying to use the ${interaction.commandName} command`);
+		
 		await interaction.deferReply();
 		const query = interaction.options.getString("query");
 		const embed = new EmbedBuilder();

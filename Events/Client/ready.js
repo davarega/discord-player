@@ -5,7 +5,7 @@ module.exports = {
 	once: true,
 
 	async execute(client, interaction) {
-		await mongoose.connect(process.env.MONGODB || "");
+		await mongoose.connect(process.env.MONGO_DB || "");
 		if(mongoose.connect)
 		console.log("[MONGODB] Database connected!");
 

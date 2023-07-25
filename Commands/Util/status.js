@@ -12,6 +12,8 @@ module.exports = {
 	 * @returns 
 	 */
 	async execute(interaction, client) {
+		console.log(`[Log] ${interaction.user.tag} is trying to use the ${interaction.commandName} command`);
+
 		await interaction.deferReply();
 		const status = ["Disconnected", "Connected", "Connecting", "Disconnecting"];
 
@@ -35,7 +37,8 @@ module.exports = {
 				{ name: "🤹🏻‍♀️ Commands", value: `${client.commands.size}`, inline: true },
 				{ name: "🌍 Servers", value: `${client.guilds.cache.size}`, inline: true },
 				{ name: "👨‍👩‍👧‍👦 Users", value: `${client.users.cache.size}`, inline: true },
-			)
+			);
+			
 		return interaction.followUp({ embeds: [embed] });
 	}
 }

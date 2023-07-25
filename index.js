@@ -24,7 +24,7 @@ player.extractors.register(SpotifyExtractor, {});
 module.exports = client;
 // module.exports.player = player;
 
-client.login(process.env.TOKEN).then(() => {
+client.login(process.env.CLIENT_TOKEN).then(() => {
 	loadCommands(client);
 	loadEvents(client);
 	loadPlayer(client, player);
