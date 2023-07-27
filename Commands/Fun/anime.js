@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction } = require('discord.js');
 const { default: axios } = require('axios');
+const { logHandler } = require('../../Handlers/logHandler');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -21,9 +22,10 @@ module.exports = {
 	 * @param {ChatInputCommandInteraction} interaction 
 	 */
 	async execute(interaction) {
-		console.log(`[Log] ${interaction.user.tag} is trying to use the ${interaction.commandName} command`);
+		logHandler("1", interaction.user.tag, interaction.commandName);
 
-		const value = interaction.options.getString("tag");
+		const { options, user } = interaction;
+		const value = options.getString("tag");
 		const embed = new EmbedBuilder();
 
 		try {
@@ -34,12 +36,15 @@ module.exports = {
 				.setURL(`${data.source_url}`)
 				.setImage(`${data.url}`)
 				.setTimestamp()
-				.setFooter({ text: `Request by ${interaction.user.tag} ` });
+				.setFooter({ text: `Request by ${user.tag} ` });
 
+			logHandler("3", user.tag, interaction.commandName, value);
 			return interaction.reply({ embeds: [embed] });
-		} catch (err) {
-			console.log(err);
+		} catch (error) {
+			console.log(error);
 			embed.setColor('Red').setDescription("⛔ | Something went wrong...");
+
+			logHandler("4", interaction.user.tag, interaction.commandName, error);
 			return interaction.reply({ embeds: [embed], ephemeral: true });
 		};
 	}

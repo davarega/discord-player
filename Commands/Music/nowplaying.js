@@ -1,5 +1,6 @@
 const { EmbedBuilder, ChatInputCommandInteraction, SlashCommandBuilder } = require("discord.js");
-const { useQueue, useTimeline } = require('discord-player')
+const { useQueue, useTimeline } = require('discord-player');
+const { logHandler } = require("../../Handlers/logHandler");
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -10,7 +11,7 @@ module.exports = {
 	 * @param {ChatInputCommandInteraction} interaction 
 	 */
 	async execute(interaction) {
-		console.log(`[Log] ${interaction.user.tag} is trying to use the ${interaction.commandName} command`);
+		logHandler("1", interaction.user.tag, interaction.commandName);
 
 		await interaction.deferReply();
 		const { guild, user } = interaction;
@@ -18,10 +19,15 @@ module.exports = {
 		const queue = useQueue(guild.id);
 		const timeline = useTimeline(guild.id);
 
-		if (!queue)
+		if (!queue) {
+			logHandler("4", interaction.user.tag, interaction.commandName, "bot not in voice channel");
 			return interaction.followUp({ content: `❌ | I am **not** in a voice channel`, ephemeral: true });
-		if (!queue.currentTrack)
+		};
+		
+		if (!queue.currentTrack) {
+			logHandler("4", interaction.user.tag, interaction.commandName, "no music playing now");
 			return interaction.followUp({ content: "❌ | There is no track **currently** playing", ephemeral: true });
+		};
 
 		const track = queue.currentTrack;
 
@@ -39,6 +45,7 @@ module.exports = {
 				{ name: 'Progress', value: `${queue.node.createProgressBar()} (${timeline.timestamp?.progress}%)`, inline: false },
 			]);
 
+			logHandler("6", interaction.user.tag, "", track.title);
 		return interaction.followUp({ embeds: [embed] });
 	}
 }

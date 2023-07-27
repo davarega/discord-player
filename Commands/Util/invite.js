@@ -1,5 +1,6 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, CommandInteraction, EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 const client = require('../../index');
+const { logHandler } = require('../../Handlers/logHandler');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -10,7 +11,7 @@ module.exports = {
 	 * @param {CommandInteraction} interaction 
 	 */
 	async execute(interaction) {
-		console.log(`[Log] ${interaction.user.tag} is trying to use the ${interaction.commandName} command`);
+		logHandler("1", interaction.user.tag, interaction.commandName);
 
 		const embed = new EmbedBuilder()
 			.setColor("#000001")
@@ -28,6 +29,7 @@ module.exports = {
 					.setStyle(ButtonStyle.Link)
 			);
 
+			logHandler("2", interaction.user.tag, interaction.commandName);
 		return interaction.reply({ embeds: [embed], components: [row] });
 	}
 };

@@ -1,4 +1,5 @@
 const { CommandInteraction, SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ComponentType } = require("discord.js");
+const { logHandler } = require("../../Handlers/logHandler");
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -9,12 +10,12 @@ module.exports = {
 	 * @param {CommandInteraction} interaction 
 	 */
 	async execute(interaction) {
-		console.log(`[Log] ${interaction.user.tag} is trying to use the ${interaction.commandName} command`);
+		logHandler("1", interaction.user.tag, interaction.commandName);
 		
 		const { client } = interaction;
 
 		const emojis = {
-			// developer: "⚙",
+			developer: "👨🏼‍💻",
 			fun: "🎉",
 			music: "🎵",
 			nsfw: "🔞",
@@ -112,5 +113,6 @@ module.exports = {
 		collector.on("end", () => {
 			initialMessage.edit({components: components(true)});
 		});
+		logHandler("2", interaction.user.tag, interaction.commandName);
 	},
 };
